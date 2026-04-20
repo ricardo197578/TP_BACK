@@ -1,7 +1,5 @@
-// Middleware para manejar rutas que no existen en la API
 // Se ejecuta cuando ninguna ruta definida coincide con la petición
-
-// Define el middleware para rutas no encontradas (404)
+// Define el middleware para rutas no encontradas o que no existen en la api (404)
 // A diferencia del errorHandler, este solo tiene 2 parámetros (req, res)
 // No necesita 'next' porque no hay a dónde continuar
 function notFound(req, res) {
