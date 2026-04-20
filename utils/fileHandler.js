@@ -12,8 +12,8 @@ async function leerArchivo(ruta) {
     // Si el archivo está vacío (data es string vacío), usa un array vacío como valor por defecto
     return JSON.parse(data || "[]");
   } catch (error) {
-    // Si ocurre algún error (archivo no existe, JSON inválido, etc.)
-    // retorna un array vacío para evitar que el programa se rompa
+    // Si ocurre error (archivo no existe, JSON inválido, etc.)
+    // retorna array vacío para evitar que el programa se rompa
     return [];
   }
 }

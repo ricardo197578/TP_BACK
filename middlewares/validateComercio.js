@@ -1,7 +1,3 @@
-// Middleware = función que se ejecuta ANTES del controller
-// Los middlewares en Express tienen acceso a req, res, y next()
-// Pueden modificar req/res, terminar la petición, o pasar al siguiente middleware/controller
-
 // Define un middleware para validar los datos de un comercio
 // Este middleware se ejecutará antes de llegar al controlador de creación/actualización
 function validarComercio(req, res, next) {
@@ -41,9 +37,6 @@ function validarComercio(req, res, next) {
 }
 
 // Exporta el middleware para que pueda ser usado en las rutas
-// Ejemplo de uso en router: 
-// router.post("/comercios", validarComercio, controller.create);
-// router.put("/comercios/:id", validarComercio, controller.update);
 module.exports = { validarComercio };
 
 /*

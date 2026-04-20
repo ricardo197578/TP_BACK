@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "1776707905798",
+    "nombre": "Insumos Ya",
+    "cuit": "20304050607",
+    "email": "insumosYa@mail.com",
+    "activo": true,
+    "createdAt": "2026-04-20T17:58:25.798Z",
+    "updatedAt": "2026-04-20T17:58:25.798Z"
+  }
+]

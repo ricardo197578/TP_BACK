@@ -13,10 +13,6 @@ function notFound(req, res) {
     error: "Ruta no encontrada"
   });
   
-  // Nota: No se llama a next() porque:
-  // 1. No hay más middlewares que puedan manejar esta situación
-  // 2. Ya se envió una respuesta al cliente
-  // 3. Es el middleware final en la cadena
 }
 
 // Exporta el middleware para usarlo en el archivo principal (app.js)
