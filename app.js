@@ -1,68 +1,36 @@
-// Archivo principal de la aplicación Express
-// Configura el servidor, middlewares, rutas y manejo de errores
-
-// Importa Express framework para crear el servidor web
 const express = require("express");
+const path = require("path");
 
-// Crea la instancia de la aplicación Express
-// 'app' es el objeto principal que manejará las peticiones HTTP
 const app = express();
-
-// Importa las rutas de comercios (endpoints específicos de la API)
-// Las rutas contienen la lógica de mapeo URL → controlador
-const comercioRoutes = require("./routes/comercio.routes");
-
-// Importa el middleware manejador de errores global
-// Captura cualquier error lanzado con next(error) en la aplicación
+const comercioWebRoutes = require("./routes/comercio.routes");
+const comercioApiRoutes = require("./routes/comercio.api.routes");
+const tiendaWebRoutes = require("./routes/tienda.routes");
+const tiendaApiRoutes = require("./routes/tienda.api.routes");
 const errorHandler = require("./middlewares/errorHandler");
-
-// Importa el middleware para rutas no encontradas (404)
-// Se ejecuta cuando ninguna ruta coincide con la petición
 const notFound = require("./middlewares/notFound");
-
-// Importa el puerto desde el archivo de configuración
-// Destructuring: extrae la variable PORT del objeto exportado
 const { PORT } = require("./config/env");
 
-// MIDDLEWARES GLOBALES 
-
-// Middleware integrado de Express para parsear JSON
-// Convierte automáticamente el body de las peticiones con Content-Type: application/json
-// Los datos parseados estarán disponibles en req.body
-// Ejemplo: req.body.nombre, req.body.email, etc.
+// Ajuste sobre aporte de la rama de prueba: separamos API y vistas para mantener MVC.
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+app.use("/css", express.static(path.join(__dirname, "css")));
 
-// RUTAS DE LA API
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
-// Monta las rutas de comercios en el path base "/comercios"
-// Todas las rutas definidas en comercioRoutes estarán prefijadas con "/comercios"
-// Ejemplos:
-//   GET /comercios           → listar todos
-//   GET /comercios/:id       → obtener uno
-//   POST /comercios          → crear nuevo
-//   PUT /comercios/:id       → actualizar
-//   DELETE /comercios/:id    → eliminar
-app.use("/comercios", comercioRoutes);
+app.use("/comercios", comercioWebRoutes);
+app.use("/tiendas", tiendaWebRoutes);
 
-// MANEJO DE ERRORES (ORDEN IMPORTANTE) 
+//dejo solo la rutas de Leonel
+//app.use("/api/comercios", comercioApiRoutes);
+//app.use("/api/tiendas", tiendaApiRoutes);
 
-// Middleware para rutas no encontradas (404)
-// DEBE ir DESPUÉS de todas las rutas definidas
-// Captura cualquier petición que no coincida con las rutas anteriores
-// Si una petición llega hasta aquí, significa que la ruta no existe
 app.use(notFound);
-
-// Middleware manejador de errores global
-// DEBE ser el ÚLTIMO middleware en la cadena
-// Captura cualquier error pasado con next(error) desde controladores/servicios
-// Tiene 4 parámetros (err, req, res, next) - Express lo reconoce automáticamente
 app.use(errorHandler);
 
-// INICIAR EL SERVIDOR
-
-// Inicia el servidor HTTP en el puerto especificado
-// El puerto viene del archivo .env o usa el valor por defecto (ej: 3000)
 app.listen(PORT, () => {
-  // Callback que se ejecuta cuando el servidor está listo
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

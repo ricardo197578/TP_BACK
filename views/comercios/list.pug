@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h2 Lista de Comercios
+
+  a(href="/comercios/nuevo") Nuevo Comercio
+
+  if comercios.length === 0
+    p No hay comercios registrados
+  else
+    table
+      thead
+        tr
+          th ID
+          th Nombre
+          th Email
+      tbody
+        each comercio in comercios
+          tr
+            td= comercio.id
+            td= comercio.nombre
+            td= comercio.email

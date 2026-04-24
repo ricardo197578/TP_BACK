@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h2 Lista de Tiendas
+
+  a(href="/tiendas/nueva") Nueva Tienda
+
+  if tiendas.length === 0
+    p No hay tiendas registradas
+  else
+    table
+      thead
+        tr
+          th ID
+          th Nombre
+          th Comercio ID
+      tbody
+        each tienda in tiendas
+          tr
+            td= tienda.id
+            td= tienda.nombre
+            td= tienda.comercioId
