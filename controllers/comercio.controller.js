@@ -52,6 +52,38 @@ async function create(req, res) {
     res.status(400).json({ error: error.message });
   }
 }
+res.render("comercios/list", {
+  comercios: []
+});
+
+// LISTAR
+exports.getAll = (req, res) => {
+  res.render("comercios/list", {
+    comercios: db.comercios
+  });
+};
+
+// FORM
+exports.getForm = (req, res) => {
+  res.render("comercios/form");
+};
+
+// CREAR
+exports.create = (req, res) => {
+  const { nombre, email } = req.body;
+
+  const nuevo = {
+    id: db.comercios.length + 1,
+    nombre,
+    email
+  };
+
+  db.comercios.push(nuevo);
+
+  res.redirect("/comercios");
+};
+
+
 
 // Controlador: Actualizar un comercio existente
 // Maneja la petición PUT a la ruta con parámetro (ej: /comercios/123)

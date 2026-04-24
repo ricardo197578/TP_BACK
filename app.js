@@ -33,7 +33,25 @@ const { PORT } = require("./config/env");
 app.use(express.json());
 
 // RUTAS DE LA API
+const comercioRoutes = require("./src/routes/comercio.routes");
+const tiendaRoutes = require("./src/routes/tienda.routes");
+const transaccionRoutes = require("./src/routes/transaccion.routes");
 
+app.use(express.urlencoded({ extended: true }));
+
+app.set("view engine", "pug");
+app.set("views", "./views");
+
+// rutas
+app.use("/comercios", comercioRoutes);
+app.use("/tiendas", tiendaRoutes);
+app.use("/transacciones", transaccionRoutes);
+
+// home
+app.get("/", (req, res) => {
+  res.render("index");
+});
+app.use(express.static("public"));
 // Monta las rutas de comercios en el path base "/comercios"
 // Todas las rutas definidas en comercioRoutes estarán prefijadas con "/comercios"
 // Ejemplos:

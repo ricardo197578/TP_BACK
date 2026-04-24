@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h2 Crear Comercio
+
+  form(action="/comercios", method="POST")
+    div
+      label Nombre:
+      input(type="text", name="nombre", required)
+
+    div
+      label Email:
+      input(type="email", name="email", required)
+
+    button(type="submit") Guardar

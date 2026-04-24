@@ -11,6 +11,9 @@ const router = express.Router();
 // Contiene la lógica de negocio para cada endpoint
 const controller = require("../controllers/comercio.controller");
 
+router.get("/", controller.getAll);
+router.get("/nuevo", controller.getForm);
+router.post("/", controller.create);
 
 // Destructuring: extrae la función validarComercio del módulo
 // Este middleware valida los datos antes de llegar al controlador
@@ -42,6 +45,9 @@ router.put("/:id", validarComercio, controller.update);
 // Ruta para ELIMINAR un comercio DELETE /comercios/:id
 // :id en URL identifica qué comercio eliminar
 router.delete("/:id", controller.remove);
+
+
+
 
 // EXPORTAR Exporta el enrutador para ser usado en app.js
 // app.js hará: app.use("/comercios", comercioRoutes)
