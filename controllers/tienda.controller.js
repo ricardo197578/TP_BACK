@@ -1,30 +1,42 @@
-const db = require("../data/db");
+const comercioService = require("../services/comercio.service");
+const tiendaService = require("../services/tienda.service");
 
-// LISTAR
-exports.getAll = (req, res) => {
-  res.render("tiendas/list", {
-    tiendas: db.tiendas
-  });
-};
+// Ajuste sobre aporte de la rama de prueba: este controlador queda para vistas Pug.
+async function getAll(req, res, next) {
+  try {
+    const tiendas = await tiendaService.obtenerTiendas();
+    res.render("tiendas/list", { tiendas });
+  } catch (error) {
+    next(error);
+  }
+}
 
-// FORM
-exports.getForm = (req, res) => {
-  res.render("tiendas/form", {
-    comercios: db.comercios
-  });
-};
+async function getForm(req, res, next) {
+  try {
+    const comercios = await comercioService.obtenerComercios();
+    res.render("tiendas/form", { comercios });
+  } catch (error) {
+    next(error);
+  }
+}
 
-// CREAR
-exports.create = (req, res) => {
-  const { nombre, comercio_id } = req.body;
+async function create(req, res, next) {
+  try {
+    const payload = {
+      nombre: req.body.nombre,
+      comercioId: req.body.comercioId
+    };
 
-  const nueva = {
-    id: db.tiendas.length + 1,
-    nombre,
-    comercio_id
-  };
+    await tiendaService.crearTienda(payload);
+    res.redirect("/tiendas");
+  } catch (error) {
+    error.status = 400;
+    next(error);
+  }
+}
 
-  db.tiendas.push(nueva);
-
-  res.redirect("/tiendas");
+module.exports = {
+  getAll,
+  getForm,
+  create
 };
