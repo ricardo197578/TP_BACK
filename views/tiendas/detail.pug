@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  h2 Detalle de Tienda
+
+  table
+    tbody
+      tr
+        th ID
+        td= tienda.id
+      tr
+        th Nombre
+        td= tienda.nombre
+      tr
+        th Comercio ID
+        td= tienda.comercioId
+      tr
+        th Comercio
+        td= comercio.nombre
+      tr
+        th Estado
+        td= tienda.activo ? "Activa" : "Inactiva"
+      tr
+        th Creado
+        td= tienda.createdAt
+      tr
+        th Actualizado
+        td= tienda.updatedAt
+
+  .actions
+    a(href=`/tiendas/${tienda.id}/editar`) Editar
+    form.inline-form(action=`/tiendas/${tienda.id}/eliminar`, method="POST")
+      button(type="submit") Eliminar
+    a(href="/tiendas") Volver

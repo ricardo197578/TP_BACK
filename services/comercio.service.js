@@ -57,9 +57,13 @@ async function actualizarComercio(id, data) {
 
 // Servicio: Eliminar un comercio
 async function eliminarComercio(id) {
-  // Delega la eliminación en el repositorio
-  // El repositorio retorna true si se eliminó (o intentó eliminar)
-  return await repo.remove(id);
+  const ok = await repo.remove(id);
+
+  if (!ok) {
+    throw new Error("Comercio no encontrado");
+  }
+
+  return true;
 }
 
 // Exporta todas las funciones del servicio

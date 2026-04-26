@@ -27,7 +27,8 @@ async function crearTienda(data) {
   const nueva = new Tienda({
     id: generarId(),
     nombre: data.nombre,
-    comercioId: data.comercioId
+    comercioId: data.comercioId,
+    activo: data.activo
   });
 
   return await tiendaRepo.create(nueva);

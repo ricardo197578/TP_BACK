@@ -1,18 +1,25 @@
 extends ../layout
 
 block content
-  h2 Crear Tienda
+  h2= tienda ? "Editar Tienda" : "Crear Tienda"
 
-  form(action="/tiendas", method="POST")
+  form(action=action, method="POST")
     div
       label Nombre:
-      input(type="text", name="nombre", required)
+      input(type="text", name="nombre", required, value=tienda ? tienda.nombre : "")
 
     div
       label Comercio:
       select(name="comercioId", required)
         option(value="") Seleccionar comercio
         each comercio in comercios
-          option(value=comercio.id)= comercio.nombre
+          option(value=comercio.id, selected=tienda && tienda.comercioId === comercio.id)= comercio.nombre
 
-    button(type="submit") Guardar
+    div
+      label(for="activo") Activa:
+      select(name="activo", id="activo")
+        option(value="true", selected=!tienda || tienda.activo) Si
+        option(value="false", selected=tienda && !tienda.activo) No
+
+    button(type="submit")= submitLabel
+    a(href="/tiendas") Cancelar

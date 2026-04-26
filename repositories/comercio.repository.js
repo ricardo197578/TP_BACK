@@ -77,6 +77,10 @@ async function remove(id) {
   // (esto elimina el que coincide con 'id')
   const filtrados = comercios.filter(c => c.id !== id);
 
+  if (filtrados.length === comercios.length) {
+    return false;
+  }
+
   // Guarda el array filtrado (sin el comercio eliminado)
   await escribirArchivo(RUTA, filtrados);
   
