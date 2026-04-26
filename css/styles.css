@@ -90,6 +90,13 @@ input {
   border-radius: 5px;
 }
 
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 /* TABLAS */
 table {
   width: 100%;
@@ -112,6 +119,26 @@ table th, table td {
 
 table tr:nth-child(even) {
   background: #f1f2f6;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+form.inline-form {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  max-width: none;
+  box-shadow: none;
+  margin: 0;
+}
+
+form.inline-form button {
+  margin: 0;
 }
 
 /* FOOTER */

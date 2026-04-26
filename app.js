@@ -24,9 +24,8 @@ app.get("/", (req, res) => {
 app.use("/comercios", comercioWebRoutes);
 app.use("/tiendas", tiendaWebRoutes);
 
-//dejo solo la rutas de Leonel
-//app.use("/api/comercios", comercioApiRoutes);
-//app.use("/api/tiendas", tiendaApiRoutes);
+app.use("/api/comercios", comercioApiRoutes);
+app.use("/api/tiendas", tiendaApiRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

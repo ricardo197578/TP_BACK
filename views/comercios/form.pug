@@ -1,21 +1,26 @@
 extends ../layout
 
 block content
-  h2 Crear Comercio
+  h2= comercio ? "Editar Comercio" : "Crear Comercio"
 
-  form(action="/comercios", method="POST")
+  form(action=action, method="POST")
     div
       label Nombre:
-      input(type="text", name="nombre", required)
+      input(type="text", name="nombre", required, value=comercio ? comercio.nombre : "")
 
     div
       label CUIT:
-      //input(type="text", name="cuit", required pattern="\d{11}") error
-      //input(type="text", name="cuit", required pattern="^\d{11}$")error
-      input(type="text", name="cuit", required pattern="^\\d{11}$")
+      input(type="text", name="cuit", required, pattern="^\\d{11}$", value=comercio ? comercio.cuit : "")
 
     div
       label Email:
-      input(type="email", name="email", required)
+      input(type="email", name="email", required, value=comercio ? comercio.email : "")
 
-    button(type="submit") Guardar
+    div
+      label(for="activo") Activo:
+      select(name="activo", id="activo")
+        option(value="true", selected=!comercio || comercio.activo) Si
+        option(value="false", selected=comercio && !comercio.activo) No
+
+    button(type="submit")= submitLabel
+    a(href="/comercios") Cancelar

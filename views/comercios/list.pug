@@ -13,10 +13,20 @@ block content
         tr
           th ID
           th Nombre
+          th CUIT
           th Email
+          th Estado
+          th Acciones
       tbody
         each comercio in comercios
           tr
             td= comercio.id
             td= comercio.nombre
+            td= comercio.cuit
             td= comercio.email
+            td= comercio.activo ? "Activo" : "Inactivo"
+            td.actions
+              a(href=`/comercios/${comercio.id}`) Ver
+              a(href=`/comercios/${comercio.id}/editar`) Editar
+              form.inline-form(action=`/comercios/${comercio.id}/eliminar`, method="POST")
+                button(type="submit") Eliminar

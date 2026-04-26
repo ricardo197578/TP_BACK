@@ -1,4 +1,4 @@
-/*const service = require("../services/tienda.service");
+const service = require("../services/tienda.service");
 
 async function getAll(req, res, next) {
   try {
@@ -61,4 +61,3 @@ module.exports = {
   update,
   remove
 };
-*/

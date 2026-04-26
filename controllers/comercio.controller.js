@@ -1,4 +1,4 @@
-/*const service = require("../services/comercio.service");
+const service = require("../services/comercio.service");
 
 // Ajuste sobre aporte de la rama de prueba: este controlador queda solo para API JSON.
 async function getAll(req, res, next) {
@@ -45,7 +45,7 @@ async function remove(req, res, next) {
     await service.eliminarComercio(req.params.id);
     res.json({ mensaje: "Eliminado correctamente" });
   } catch (error) {
-    error.status = 500;
+    error.status = error.message === "Comercio no encontrado" ? 404 : 500;
     next(error);
   }
 }
@@ -57,4 +57,3 @@ module.exports = {
   update,
   remove
 };
-*/

@@ -1,4 +1,4 @@
-/*const express = require("express");
+const express = require("express");
 
 const controller = require("../controllers/comercio.controller");
 const { validarComercio } = require("../middlewares/validateComercio");
@@ -12,4 +12,3 @@ router.put("/:id", validarComercio, controller.update);
 router.delete("/:id", controller.remove);
 
 module.exports = router;
-*/
