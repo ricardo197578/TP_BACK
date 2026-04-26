@@ -6,9 +6,8 @@ function notFound(req, res) {
   // Envía respuesta con código 404 (Not Found)
   // Indica que el recurso solicitado no existe en el servidor
   res.status(404).json({
-    // Mensaje genérico indicando que la ruta no fue encontrada
     // No se usa req.url para no exponer detalles internos
-    error: "Ruta no encontrada"
+    error: "Ruta no encontrada" // Mensaje genérico indicando que la ruta no fue encontrada
   });
   
 }
@@ -17,11 +16,11 @@ function notFound(req, res) {
 module.exports = notFound;
 
 /*
+Ejemplo:
 Petición: GET /api/productos (ruta que NO existe)    
 Express busca coincidencia en las rutas definidas
     
 ¿Coincide con /api/comercios?  NO
-¿Coincide con /api/usuarios?  NO
     
 Ninguna ruta coincidió    
 Ejecuta el middleware notFound (porque está después de todas las rutas)    
